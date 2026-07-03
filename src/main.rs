@@ -10,7 +10,7 @@ fn main() {
             state: PlayerStates::Idle,
         },
     })];
-    let mut systems: Vec<Box<dyn System>> = vec![Box::new(PlayerLogic { speed: 0 as i64 })];
+    let mut systems: Vec<Box<dyn System>> = vec![Box::new(PlayerLogic { speed: 5 as f64 })];
 
     reborn::run(&mut world, &systems);
 }
@@ -52,6 +52,13 @@ impl reborn::Component for PlayerComp {
             }
         }
     }
+    fn change_val(&mut self, value: f64) {
+        if self.get_state() == "Walking" {
+            self.state = PlayerStates::Walking(value);
+        } else {
+            println!("WARNING: not on a state with a value");
+        }
+    }
 }
 
 impl reborn::Entity for Player {
@@ -76,6 +83,11 @@ impl reborn::Entity for Player {
                 _ => None,
             },
             _ => None,
+        }
+    }
+    fn change_component_val(&mut self, comp: &str, val: f64) {
+        if self.get_component_state("PlayerComp") == Some("Walking") {
+            self.comp.change_val(val);
         }
     }
     fn get_component_state(&self, comp: &str) -> Option<&str> {
@@ -109,7 +121,7 @@ impl reborn::System for PlayerLogic {
                         println!("I'm idle btw")
                     }
                     "Walking" => {
-                        let speed = match item.get_component_val("PlayerComp") {
+                        let speed = match item.get_component_val("Walking") {
                             None => -999.99,
                             Some(j) => j,
                         };
