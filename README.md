@@ -13,7 +13,10 @@ I made in the span of a single day on 5 hours of sleep, with
 quality to match. My original idea was to make it in one week,
 but after some OS issues, I had to switch OSes and forgot to
 back up my data, so I decided I'd just redo all the progress
-in a single day.
+in a single day. That's why it's called reborn, because it
+was reborn from the faliure of the old project. It's the only
+real way to honor the lost effort I put in and maybe turn it
+into a good thing.
 
 I didn't succeed at all the plans, I had to cut off graphics
 and make it entierly text based, but I hope to use graphics
