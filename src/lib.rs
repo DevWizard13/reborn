@@ -18,6 +18,7 @@ pub trait Entity {
 pub trait System {
     fn components(&self) -> Vec<&str>;
     fn operate(&self, item: &mut dyn Entity);
+    fn operate_on_others(&self, world: &mut Vec<Box<dyn Entity>>, index: usize) {}
 }
 
 pub fn run(world: &mut Vec<Box<dyn Entity>>, logic: &Vec<Box<dyn System>>) {
@@ -29,7 +30,10 @@ pub fn run(world: &mut Vec<Box<dyn Entity>>, logic: &Vec<Box<dyn System>>) {
                     .iter()
                     .all(|item| j.components().contains(item as &&str))
                 {
-                    j.operate(&mut *world[i]);
+                    {
+                        j.operate(&mut *world[i]);
+                    }
+                    j.operate_on_others(world, i);
                 }
             }
         }

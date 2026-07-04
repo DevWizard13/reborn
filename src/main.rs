@@ -125,7 +125,7 @@ impl reborn::System for PlayerLogic {
                             None => -999.99,
                             Some(j) => j,
                         };
-                        println!("I'm walking at speed ${speed}");
+                        println!("I'm walking at speed {speed}");
                         item.change_component_state("PlayerComp", "Jumping");
                     }
                     "Jumping" => {
